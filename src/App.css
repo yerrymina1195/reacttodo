@@ -42,3 +42,28 @@
     transform: rotate(360deg);
   }
 }
+
+.new-item-form {
+  display: flex;
+ 
+  gap: 0.5rem;
+}
+.new-item-form input {
+  outline: none !important;
+  border: 1px solid hsl(200, 100%, 40%) !important;
+  background: hsl(200, 100%, 30%) !important;
+  border-radius: 0.25em !important;
+  padding: 0.25em 0.5em !important;
+  color: hsl(200, 100%, 90%) !important;
+}
+
+
+.gtr {
+  background: hsl(200, 100%, 50%, 0.1);
+  border: 1px solid hsl(200, 100%, 50%);
+  color: hsl(200, 100%, 50%);
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  outline: none;
+}

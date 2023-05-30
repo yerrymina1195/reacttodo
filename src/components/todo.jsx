@@ -1,20 +1,20 @@
 import { useState} from "react";
 import Conteiner from "./Conteiner";
-
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import {TodoForm} from './TodoForm'
+import { EditForm } from "./EditForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
 export const Display = ()=>{
     
 const [todoTask, setTodoTask]= useState([]);
 const [newTask, setNewTask]= useState("");
 
+
 const changemet= (event)=>{
  
   setNewTask(event.target.value)
 }
-const ajout=()=>{
+const ajout=(e)=>{
+  e.preventDefault()
   // const newData=[...todoTask,newTask];
   if (newTask === "") return
     
@@ -22,9 +22,11 @@ const ajout=()=>{
   const task ={
     id: todoTask.length === 0 ? 1: todoTask[todoTask.length - 1].id + 1,
     taskName: newTask,
-    completed:false
+    completed:false,
+    isEditing: false
   }
 setTodoTask([...todoTask,task]);
+setNewTask("")
 
 }
 const deleteTask=(taskname)=>{
@@ -41,22 +43,33 @@ const newTodolistWithCompletedTask= todoTask.map((task)=>{
 })
 setTodoTask(newTodolistWithCompletedTask)
 }
+const editTodo = (id) => {
+  const todoEditing=    todoTask.map((todo) =>
+  todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+)
+setTodoTask(todoEditing);
+}
+
+const editTask = (task, id) => {
+  
+  const todoEditingFinal=    todoTask.map((todo) =>
+  todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+)
+  setTodoTask(todoEditingFinal);
+};
+
 return(
   <>
-    <InputGroup className="mt-3 w-50 mx-auto"   onChange={changemet}>
-    <Form.Control
-      placeholder="New Task"
-      aria-label="Recipient's username"
-      aria-describedby="basic-addon2"
-    />
-    <Button variant="outline-secondary" className='btn btn-success text-white' onClick={ajout} id="button-addon2">
-      ajouter
-    </Button>
-  </InputGroup>
-    {todoTask.map(({taskName ,id,completed})=>{
-     return  <Conteiner taskDisplay={taskName} deleteTask={deleteTask} completedTask={completedTask} completed={completed} id={id}/>
-    })}
-  
+    <TodoForm something={ajout} onChange={changemet} value={newTask} />
+   
+     {todoTask.map(({taskName ,isEditing ,id,completed})=>
+        isEditing ? (
+          <EditForm something={editTask} id={id} taskName={taskName} />
+        ) : (
+          <Conteiner taskDisplay={taskName} deleteTask={deleteTask} completedTask={completedTask} completed={completed} editTodo={editTodo} id={id}/>
+        )
+      )}
+
   </>
 
 )
