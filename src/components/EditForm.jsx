@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { dataContext } from "./todo";
+import { todoContext } from "./todo";
 import { useContext } from "react";
 
 export const EditForm = (props) => {
   const {id , taskName} = props
-  const [todoTask, setTodoTask] = useContext(dataContext);
+  const {editTask} = useContext(todoContext);
   const [valu, setValue] = useState(taskName);
   const changemet = (event) => {
-    const rt = event.target.value;
-    console.log(rt);
     setValue(event.target.value);
   };
-  const editTask = (task, id) => {
-    const todoEditingFinal = todoTask.map((todo) =>
-      todo.id === id
-        ? { ...todo, taskName: task, isEditing: !todo.isEditing }
-        : todo
-    );
-    setTodoTask(todoEditingFinal);
-  };
+  // const editTask = (task, id) => {
+  //   const todoEditingFinal = todoTask.map((todo) =>
+  //     todo.id === id
+  //       ? { ...todo, taskName: task, isEditing: !todo.isEditing }
+  //       : todo
+  //   );
+  //   setTodoTask(todoEditingFinal);
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 

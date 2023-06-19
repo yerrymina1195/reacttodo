@@ -1,36 +1,36 @@
 import React from 'react'
-import { dataContext } from "./todo";
+import { todoContext } from "./todo";
 import { useContext } from "react";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Conteiner({taskDisplay,id, completed}) {
-  const [todoTask, setTodoTask]= useContext(dataContext);
+  const {editTodo,completedTask,deleteTask}= useContext(todoContext);
 
 
 
-const deleteTask=(taskname)=>{
-   const newTodoList = todoTask.filter(({id})=> id !== taskname);
-   setTodoTask(newTodoList)
-}
+// const deleteTask=(taskname)=>{
+//    const newTodoList = todoTask.filter(({id})=> id !== taskname);
+//   //  setTodoTask(newTodoList)
+// }
 
-const completedTask =(id)=>{
-  const newTodolistWithCompletedTask= todoTask.map((task)=>{
-    if(task.id === id){
-      return { ...task, completed:true}
-    }else{
-      return task
-    }
-  })
-  setTodoTask(newTodolistWithCompletedTask)
-  }
+// const completedTask =(id)=>{
+//   const newTodolistWithCompletedTask= todoTask.map((task)=>{
+//     if(task.id === id){
+//       return { ...task, completed:true}
+//     }else{
+//       return task
+//     }
+//   })
+//   // setTodoTask(newTodolistWithCompletedTask)
+//   }
 
-const editTodo = (id) => {
-  const todoEditing=    todoTask.map((todo) =>
-  todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
-)
-setTodoTask(todoEditing);
-}
+// const editTodo = (id) => {
+//   const todoEditing=    todoTask.map((todo) =>
+//   todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+// )
+// // setTodoTask(todoEditing);
+// }
 
   return (
     

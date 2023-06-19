@@ -1,11 +1,11 @@
 import { EditForm } from "./EditForm";
 import Conteiner from "./Conteiner";
-import { dataContext } from "./todo";
+import { todoContext } from "./todo";
 import { useContext } from "react";
 
 export const Todocontain = () =>{
 
-  const [todoTask]= useContext(dataContext);
+  const {todoTask}= useContext(todoContext);
 
 // console.log({props}); 
 // const {todoTask,editTask,completedTask,deleteTask,editTodo} = props
